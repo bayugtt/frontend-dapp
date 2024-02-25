@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "digiera",
+  "private_key_id": "06593be6befede750857061f70be67f0663d8993",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCR6EbtAAKjWpTA\nm/PrUPqUik07C+rQL5FzLw8PpElrTbDN/vVTaj9YcLvWC5Tse0R377a5vew9eS57\nM7/cX3GItxzYpNLVT4hcL0I19i6t7+2TpMLxvZ429KXLbRTlzKvEN8yLLrGW6nkD\nf1d2nfrmK3BLyioPdVKsS8RFzzC63JOreCAyWt4awlSop8qHRhidHh7bqvJ3/XM+\nB4FSHo8U2NshhGTj0ufQRX1D3GEOniy43w6UwhvTrHpDmIPNy44oBeWsmtibSY5r\n8bH+JuuO50dYUOkFaqQm0U9Csf76KKCJMEsq7T+rDeWLiaII4m23P9zPw4kRA5Tf\ntonjuas7AgMBAAECggEAIZeRMMJ2WQajRb8CBvTjZCx9QHFrc9fnzFWSyZ6g2qgN\n4zdmYviMsf9ud4a+GD3/Ev/pGVVtHPAX7/yHmSSOPpQt+4DjG4JOmi61NzhBIgGh\nuILP8RkfYnar7yxjic634xqXqJmtAFpmVxRL3j7cA38PwRs/2MRBrvJYs1vS08pY\n12oyOnllDB/wPX/VxY1MNKgjJhpImFCZK9TRCyyoPU18hZm1b7dLA8RQBUqWjADP\n949n2NnL5ikUH4hqA2fsbWJFcRzMVVo7pt00K8SZW2ayw8dsb3kPB6l7urMgUnGj\nny9OEJO4i3hY4FgGVXEs1MdzuxvFPtGBjZ39z9SKAQKBgQDIFEpoCW+voMSLGYT8\n2A4z3tF1ogn5scgyBfpP8zoedCvlfMcX/weEZrC1dD1Z/NDGn245wewb/uH5kaPj\nZdtWiir//rYwKAO/3DQn2TvNLIWWIXnZ5BPx7UD9oHqQ3u91oYiAlFVHZkSv3kCF\n7cM/vb8mOR5P4xwz0/kg+gbSAQKBgQC6r/l+bZ9olASvwQiI3IsX2xyBNsENXIuj\n5/phCdO6tnt4lwj4elV5q+o19Mjchjqyq/DR+AYydc3ZSurAUrsw6whYV149x2ij\noD4pnQmA8Wz/ZYMLp2ISfUkag8FpCmbQpVFB9WGHz6I5Hiyesrnz0o9Jj29BVIp4\n7JjUw41FOwKBgFFYVowH0h2wmlgHbxcxbEzQeY5+69lV25Pi9EsPE4EQMEykN3nd\nGRxOd+e+M7djXypx5WmcGzeioBNMkDpCzjNYB3V/BGl9y1B04cuVuYeIY2OPhq/8\n19MTZ8n2Nf6ydN75ZrsIE8fsn151WPxal3hR1+ZdcKKALpYvx2kN3joBAoGAW656\nT42UgK5Yktuwzk3I/WE84XQ7YM13Qnp1atyBn6tofbNm02h4u7Ui43aggjRldUOd\nk/BDUtqpyjHRkbvPdFmokoHtpVdd2yWiAZu+hBWMmuyGa926+yuOEDhubqCOF59o\nhYT1bdYZbAWWkiVhzw00E0Mety3Gh1ZiQ/L5WOsCgYEAq/MOomrgLR6ZSOugOi60\nnKC2Vtp1Twov0gvEQlGOqBliaW7d5niqONaxzyfxmCaPymVAi85fnKJ06dRw2Tik\nu5vnMOc9XzN0exDi7pbhTLRREO+cRPQmfkAMht6FHXvByUsNDuZ8YKoprXYYFDCx\n3xoG5P23fPYDIQyHE2YVvQk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "digiera@digiera.iam.gserviceaccount.com",
+  "client_id": "108116501049565805025",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/digiera%40digiera.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

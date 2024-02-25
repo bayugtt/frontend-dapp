@@ -15,7 +15,10 @@ export default function Home() {
                   className="style2 text-strong"
                   style={{ opacity: 1, transform: "none" }}
                 >
-                  3,333 digibase are unique dog living in Base Chain forever. <br/>
+                  Digibase symbolize freedom and a rebellious spirit. <br />
+                  Our goal is to build a resilient community that is immune to market cycles, serving as a refuge that can withstand any setback.
+                  <br />
+                  With 3,333 Digibase are unique living dog in Base Chain eternally. <br />
                 </p>
                 <ul id="buttons02" className="style1 buttons">
                   <li style={{ opacity: 1, transform: "none" }}>
@@ -27,10 +30,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          
-
-
           {/* container image1  */}
           <div
             id="image01"
@@ -50,7 +49,7 @@ export default function Home() {
                 </h2>
                 <p id="text02" className="style2">
                   "In the depths of the night, a faithful dog named Digibase emerges, transforming darkness into dawn with the inherent strength of BASE. With unwavering courage, he forges ahead, carrying the torch of his valiant heart. Digibase remains a perpetual presence by your side, eternally."
-                  
+
                 </p>
               </div>
             </div>
@@ -86,19 +85,19 @@ export default function Home() {
           <br />
           <div className="wrapper">
             <div className="inner" data-position="center">
-            <ul id="buttons02" className="style1 buttons">
-                  <li style={{ opacity: 1, transform: "none" }}>
-                    <a href="/apply" className="button n01">
-                      <span className="label">Get Early Access Now</span>
-                    </a>
-                  </li>
-                </ul>
+              <ul id="buttons02" className="style1 buttons">
+                <li style={{ opacity: 1, transform: "none" }}>
+                  <a href="/apply" className="button n01">
+                    <span className="label">Get Early Access Now</span>
+                  </a>
+                </li>
+              </ul>
             </div>
             <div className="wrapper">
               <div className="inner" data-position="center">
                 <ul id="icon02" className="style1 icons">
                   <li>
-                    <a className="n01" target="_blank" href="twitter.com/">
+                    <a className="n01" target="_blank" href="https://twitter.com/Digibaseart/">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5"

@@ -1,5 +1,4 @@
 'use client'
-
 import Apply from './app';
 import '@rainbow-me/rainbowkit/styles.css';
 import {
@@ -8,41 +7,38 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import {
-  baseGoerli,
   mainnet,
-
+  base,
 } from 'wagmi/chains';
-
 import { publicProvider } from 'wagmi/providers/public';
 
-
-const { chains, publicClient } = configureChains(
-  [mainnet, baseGoerli],
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [mainnet, base],
   [
     publicProvider()
   ]
 );
 const { connectors } = getDefaultWallets({
-  appName: 'DIGIBASE',
+  appName: 'digibase',
   projectId: '96ab49311472829887a0342f28a33171',
-  chains
+  chains,
 });
+
 const wagmiConfig = createConfig({
   autoConnect: false,
   connectors,
-  publicClient
+  publicClient,
+  webSocketPublicClient
 })
-
-
 
 // Pass config to React Context Provider
 function App() {
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider modalSize="compact" initialChain={baseGoerli} chains={chains} >
-       <Apply />
-      </RainbowKitProvider>
-    </WagmiConfig>
+      <WagmiConfig config={wagmiConfig}>
+        <RainbowKitProvider modalSize="compact" chains={chains} >
+          <Apply />
+        </RainbowKitProvider>
+      </WagmiConfig>
   )
 }
 export default App;

@@ -1,7 +1,7 @@
 {
-  "name": "frontend-dapp",
+  "name": "@bip341/frontend-dapp",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,35 +10,54 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.16",
+    "@rainbow-me/rainbowkit": "^1.0.7",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "@walletconnect/sign-client": "^2.9.2",
     "autoprefixer": "10.4.14",
+    "dotenv": "^16.3.1",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "googleapis": "^123.0.0",
     "lokijs": "^1.5.12",
     "next": "13.4.10",
+    "next-auth": "^4.24.6",
     "pino-pretty": "^10.2.0",
     "postcss": "8.4.26",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.45.2",
     "react-toastify": "^9.1.3",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "wagmi": "^1.3.9"
   },
   "devDependencies": {
+    "@heroicons/react": "^2.0.18",
     "@openzeppelin/merkle-tree": "^1.0.5",
-    "@rainbow-me/rainbowkit": "^1.0.7",
     "@tailwindcss/forms": "^0.5.4",
     "@types/fs-extra": "^11.0.1",
     "@types/json-bigint": "^1.0.1",
     "install": "^0.13.0",
     "json-bigint": "^1.0.0",
     "npm": "^9.8.1",
-    "viem": "^1.4.1",
-    "wagmi": "^1.3.9"
-  }
+    "viem": "^1.4.1"
+  },
+  "description": "this is for learning purpose only.",
+  "main": "next.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bayugtt/frontend-dapp.git"
+  },
+  "keywords": [
+    "frontend",
+    "mint",
+    "nft"
+  ],
+  "author": "gtt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bayugtt/frontend-dapp/issues"
+  },
+  "homepage": "https://github.com/bayugtt/frontend-dapp#readme"
 }

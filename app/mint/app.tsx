@@ -13,18 +13,9 @@ import { StandardMerkleTree } from "@openzeppelin/merkle-tree";
 import { useState, useEffect } from 'react';
 import { parseEther } from "viem";
 import { Tab } from '@headlessui/react'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
-
-
-
-
-async function fetchTreeDataFromAPI() {
-  const response = await fetch('./api/myapi');
-  const data = await response.json();
-  return data; // Assuming the API returns an array of items
-}
 const contractConfig = {
   address: "0x65883d1669bf2c8cfa5ef31b8b7650087b14237b",
   abi,
@@ -47,7 +38,7 @@ export default function Mint() {
   const [values, setValue] = useState<number>(1);
 
   const handleIncrement = () => {
-    setValue((prevValue) => Math.min(prevValue + 1, 5));
+    setValue((prevValue) => Math.min(prevValue + 1, 10));
   };
 
   const handleDecrement = () => {
@@ -56,9 +47,8 @@ export default function Mint() {
     }
   };
   const price: number = 0.001;
-  let amount = values.toString();
+  // let amount = values.toString();
   let publicPrice = (values * price).toString();
-
 
 
   React.useEffect(() => setMounted(true), []);
@@ -71,43 +61,44 @@ export default function Mint() {
   useEffect(() => {
     fetchData(); // Fetch data when the component mounts
   }, [address]);
+
   const fetchData = async () => {
-    const response = await fetch('./api/myapi');
-    const fetchedData = await response.json();
-    // Assuming the fetchedData contains the properties 'format', 'tree', and 'leafEncoding'
-    setData(fetchedData);
-    setIsLoading(false); // Set isLoading to false once data is fetched and tree is loaded
-  };
-
-  const findProofForValue = (tree: any, address: string) => {
-    let proofValue; // Initialize 'proofValue' to null initially
-    for (const [i, v] of tree.entries()) {
-      if (v[0] === address) {
-        const proof = tree.getProof(i);
-        proofValue = proof; // Store the proof value in the variable 'proofValue'
-        setProofValue(proof);
+    const apiToken = process.env.API_TOKEN; // Get the API token from the environment variable
+    try {
+      const response = await fetch('./api/myapi', {
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    }
-    if (isLoading) {
-      return <div>Cheking Whitelisted address...</div>;
-    }
-    // You can now use 'proofValue' as needed, for example, set it in the state or use it in other parts of your component.
-    else {
-      <div>sorry you are not Whitelisted or Alreadt claimed</div>
+      const fetchedData = await response.json();
+      setData(fetchedData);
+      setIsLoading(false); 
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
     }
   };
-
-
-
-
 
   useEffect(() => {
-    if (data && address && isConnected && !isLoading) {
+    const findProofForValue = (tree: any, address: string) => {
+      let proofValue; // Initialize 'proofValue' to null initially
+      for (const [i, v] of tree.entries()) {
+        if (v[0] === address) {
+          const proof = tree.getProof(i);
+          proofValue = proof; // Store the proof value in the variable 'proofValue'
+          setProofValue(proof);
+        }
+      }
+    };
+
+    if (data && address && isConnected) {
       const tree = StandardMerkleTree.load(data);
       findProofForValue(tree, address.toLowerCase())
-      // Now you have the loaded 'tree' from your data, you can use it as needed
     }
-  }, [data, address, isConnected && isLoading]);
+  }, [data, address, isConnected]);
 
 
   const [totalMinted, setTotalMinted] = React.useState<number>(0);
@@ -121,8 +112,7 @@ export default function Mint() {
 
     },
   });
-  // console.log("error karena "+ error?.message);
-  // console.log("proofnya adalah ", proofValue)
+
   const {
     data: mintData,
     write: mint,
@@ -145,17 +135,6 @@ export default function Mint() {
   } = useWaitForTransaction({
     hash: mintData?.hash,
   });
-  // for public Buuton
-
-
-
-  // const {
-  //   data: txDataPub,
-  //   isSuccess: txSuccessPub,
-  //   error: txErrorPub,
-  // } = useWaitForTransaction({
-  //   hash: mintData?.hash,
-  // });
 
   //public mint
 
@@ -293,13 +272,13 @@ export default function Mint() {
                                   {mounted && isConnected && !isMinted && (
                                     <li style={{ opacity: 1, transform: "none" }}>
 
-                                      <a className="button n01">
+                                      <a onClick={() => mint?.()} className="button n01 cursor-pointer">
 
                                         <button
                                           disabled={!mint || isMintLoading || isMintStarted}
                                           data-mint-loading={isMintLoading}
                                           data-mint-started={isMintStarted}
-                                          onClick={() => mint?.()}
+
                                         >
                                           {isMintLoading && "Waiting for approval"}
                                           {isMintStarted && "Minting..."}
@@ -317,8 +296,8 @@ export default function Mint() {
 
 
                                   {txSuccess && (
-                                    <li style={{ opacity: 1, transform: "none" }}>
-                                      <ul id="buttons02" className="style1 buttons">
+                                    <ul id="buttons02" className="style1 buttons">
+                                      <li style={{ opacity: 1, transform: "none" }}>
                                         <a
                                           href="https://testnets.opensea.io/collection/digibase"
                                           target="_blank"
@@ -326,19 +305,20 @@ export default function Mint() {
                                         >
                                           <button>View on Opensea</button>
                                         </a>
-                                      </ul>
-                                    </li>
+                                      </li>
+                                    </ul>
+
                                   )}
                                 </ul>
                                 {isConnected && mintError && txError && (
                                   <p id="text02" className="style2">An error occurred: {mintError?.name}</p>
                                 )}
-                                 {isConnected && txDataPub && (
+                                {isConnected && txData && (
                                   <p id="text02" className="style2">view on
-                                    <a href={`https://goerli.basescan.org/tx/${mintData?.hash}`} > BaseScan</a>
-                                </p>
+                                    <a href={`https://goerli.basescan.org/tx/${mintData?.hash}`} target="_blank" > BaseScan</a>
+                                  </p>
 
-                              )}
+                                )}
                               </div>
                             </Tab.Panel>
 
@@ -363,7 +343,6 @@ export default function Mint() {
                                       </button>
                                       <input
                                         readOnly
-                                        aria-posinset={2}
                                         className="w-16 h-6 text-center bg-white border-l border-r border-gray-300 flex-grow"
                                         type="number"
                                         step="1"
@@ -379,23 +358,18 @@ export default function Mint() {
                                     </div>
                                   </div>
                                 </div>
-                                {/* KURANG USER INPUT BUAT MINT DI PUBLIK */}
 
-
-                                <ul id="buttons02" className="style1 buttons">
-
-                                  {/* // te */}
-
-                                  {mounted && isConnected && !isMintedPub && (
+                                {mounted && isConnected && !isMintedPub && (
+                                  <ul id="buttons02" className="style1 buttons">
                                     <li style={{ opacity: 1, transform: "none" }}>
 
-                                      <a className="button n01">
+                                      <a onClick={() => write?.()} className="button n01 cursor-pointer">
 
                                         <button
                                           disabled={!write || isMintLoadingPub || isMintStartedPub}
                                           data-mint-loading={isMintLoadingPub}
                                           data-mint-started={isMintStartedPub}
-                                          onClick={() => write?.()}
+
                                         >
                                           {isMintLoadingPub && "Waiting for approval"}
                                           {isMintStartedPub && "Minting..."}
@@ -409,63 +383,81 @@ export default function Mint() {
 
 
                                     </li>
-                                  )}
+                                  </ul>
+                                )}
 
 
-                                  {txSuccessPub && (
+                                {txSuccessPub && (
+                                  <ul id="buttons02" className="style1 buttons">
                                     <li style={{ opacity: 1, transform: "none" }}>
-                                      <ul id="buttons02" className="style1 buttons">
-                                        <a
-                                          href="https://testnets.opensea.io/digibase"
-                                          target="_blank"
-                                          className="button n01"
-                                        >
-                                          <button>View on Opensea</button>
-                                        </a>
-                                      </ul>
+                                      <a
+                                        href="https://testnets.opensea.io/digibase"
+                                        target="_blank"
+                                        className="button n01"
+                                      >
+                                        <button>View on Opensea</button>
+                                      </a>
                                     </li>
+                                  </ul>
+                                )}
 
-                                  )}
-                                </ul>
                               </div>
                               {isConnected && !isSuccess && (
                                 <div className="text-white">Error occured: {error?.name}</div>
                               )}
                               {isConnected && txDataPub && (
-                                  <p id="text02" className="style2">view on
-                                    <a href={`https://goerli.basescan.org/tx/${mintDataPub?.hash}`} > BaseScan</a>
+                                <p id="text02" className="style2">view on
+                                  <a href={`https://goerli.basescan.org/tx/${mintDataPub?.hash}`} target="_blank"> BaseScan</a>
                                 </p>
 
                               )}
-                          </Tab.Panel>
+                            </Tab.Panel>
 
-                        </Tab.Panels>
-                      </Tab.Group>
+                          </Tab.Panels>
+                        </Tab.Group>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div
+            id="image01"
+            data-position="center"
+            className="style1 image full screen"
+          >
+            <span className="frame">
+              <img src="../image02.png" alt="DIGIBASE"></img>
+            </span>
+          </div>
+          {/* Footer */}
+          <div className="wrapper">
+            <div className="inner" data-position="center">
+              <ul id="icon02" className="style1 icons">
+                <li>
+                  <a className="n01" target="_blank" href="https://twitter.com/Digibaseart/">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                    </svg>
+                    <span className="label">Twitter</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            {/* Foot Tag */}
 
-
+            <p id="text13" className="style9 py-7">
+              Powered by
+              <a href="https://base.org"> Base</a>.
+            </p>
           </div>
         </div>
-
-
-
-
-
-
-        <div
-          id="image01"
-          data-position="center"
-          className="style1 image full screen"
-        >
-          <span className="frame">
-            <img src="../image02.png" alt="DIGIBASE"></img>
-          </span>
-        </div>
-    </div>
       </main >
     </div >
   );

@@ -183,6 +183,10 @@ a {
   transition: color 0.25s ease;
 }
 
+#base {
+  text-decoration: none !important;
+}
+
 #wrapper {
   -webkit-overflow-scrolling: touch;
   align-items: center;
@@ -193,6 +197,9 @@ a {
   overflow: visible;
   position: sticky;
   z-index: 2;
+}
+p span {
+  display: block;
 }
 
 #main {
@@ -1496,6 +1503,15 @@ h1.style7 span.p:nth-child(n + 2), h2.style7 span.p:nth-child(n + 2), h3.style7 
 }
 
 .buttons.style1 .button {
+  background-color: #FF8A00;
+  color: #FFFFFF;
+  background-image: linear-gradient(45deg, #AF00DB 0%, rgba(255,138,0,0.008) 100%);
+  background-position: 0% 0%;
+  background-repeat: repeat;
+  background-size: cover;
+}
+
+.buttonku {
   background-color: #FF8A00;
   color: #FFFFFF;
   background-image: linear-gradient(45deg, #AF00DB 0%, rgba(255,138,0,0.008) 100%);

@@ -3,7 +3,26 @@ import path from 'path';
 
 export default function handler(req, res) {
   // Get the file path of data.json in the public folder
-  const filePath = path.join(process.cwd(), 'public', 'tree.json');
+  const filePath = path.join(process.cwd(), 'pages/api', 'tree.json');
+
+  // Function to check authentication
+  const authenticate = () => {
+    const apiToken = process.env.API_TOKEN; // Get the API token from the environment variable
+    const authHeader = req.headers.authorization;
+
+    // Check if the Authorization header is present and has the correct token
+    if (!authHeader || authHeader !== `Bearer ${apiToken}`) {
+      return false;
+    }
+
+    return true;
+  };
+
+  // Check authentication before proceeding
+  if (!authenticate()) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
 
   // Read the file contents
   fs.readFile(filePath, 'utf8', (err, data) => {

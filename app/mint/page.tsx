@@ -14,21 +14,22 @@ import {
 import { publicProvider } from 'wagmi/providers/public';
 
 
-const { chains, publicClient } = configureChains(
+const { chains, publicClient, webSocketPublicClient } = configureChains(
   [baseGoerli],
   [
     publicProvider()
   ]
 );
 const { connectors } = getDefaultWallets({
-  appName: 'DIGIBASE',
+  appName: 'digibase',
   projectId: '96ab49311472829887a0342f28a33171',
   chains
 });
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
-  publicClient
+  publicClient,
+  webSocketPublicClient
 })
 
 
